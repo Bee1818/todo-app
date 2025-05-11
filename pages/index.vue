@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <h1 class="text-2xl font-bold">My Todo App</h1>
-    <p>Count: {{ counter.count }}</p>
-    <button @click="counter.increment">Increment</button>
-    <button @click="counter.decrement">Decrement</button>
+  <div class="container">
+    <h1 class="text-2xl font-bold title">My Todo App</h1>
+    <h1 class="text-3xl font-bold">Tailwind 有効化完了！</h1>
   </div>
 </template>
 
 <script setup>
-import { useCounterStore } from '~/stores/counter'
-
-const counter = useCounterStore()
 </script>
+<style scoped>
+.container {
+  background-color: antiquewhite;
+}
+.title {
+  color: blue;
+}
+</style>
