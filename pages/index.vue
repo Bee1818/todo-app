@@ -8,11 +8,11 @@
     <ul class="w-4/5">
       <li
       v-for="(todo, index) in todos" 
-      class="flex justify-between items-center">
-        <p>{{ todo }}</p>
-        <div class="flex gap-[10px] w-[100px]">
+      class="list-none">
+        <p class="w-5/6">{{ todo }}</p>
+        <div class="flex justify-end gap-[10px]">
           <button class="button edit block">編集</button>
-          <button class="button delete block">削除</button>
+          <button @click="deleteTodo(index)" class="button delete block">削除</button>
         </div>
       </li>
     </ul>
@@ -25,7 +25,7 @@ import { useTodoStore } from '../stores/todo'
 
 const todoStore = useTodoStore()
 const { todos, newTodo } = storeToRefs(todoStore)
-const { addTodo } = todoStore
+const { addTodo, deleteTodo } = todoStore
 </script>
 <style scoped>
 .button {
