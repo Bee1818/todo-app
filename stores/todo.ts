@@ -14,10 +14,15 @@ export const useTodoStore = defineStore('todo', () => {
     }
   }
 
+  function deleteTodo(index: number): void {
+    todos.value.splice(index, 1)
+  }
+
   return {
     todos,
     newTodo,
     addTodo,
+    deleteTodo,
   }
 
 })
