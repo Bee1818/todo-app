@@ -1,6 +1,8 @@
 <template>
   <div class="text-center">
     <h1>TODOリスト</h1>
+    <!-- submitイベントで関数addTodoを呼び出す -->
+     <!-- inputで入力された値をtodo.tsの変数newTodoにもv-modalで反映 -->
     <form @submit.prevent="addTodo" class="w-4/5 mx-auto flex gap-[10px]">
       <input v-model="newTodo" type="text" placeholder="新しいメモ入力" class="block w-4/5">
       <button type="submit" class="button add block">追加</button>
@@ -20,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+// storeToRefs:todo.tsをvueでも使えるようにする
 import { storeToRefs } from 'pinia'
 import { useTodoStore } from '../stores/todo'
 
