@@ -7,6 +7,8 @@ export const useTodoStore = defineStore('todo', () => {
 
   const todos = ref<string[]>([])
   const newTodo = ref<string>('')
+  const editStatus = ref<number | null>(null)
+  const editText = ref<string>('')
 
   // メモ追加機能
   function addTodo(): void {
@@ -25,11 +27,19 @@ export const useTodoStore = defineStore('todo', () => {
     todos.value.splice(index, 1)
   }
 
+  function editTodo(index:number): void {
+    editStatus.value = index
+    editText.value = todos.value[index]
+  }
+
   return {
     todos,
     newTodo,
+    editStatus,
+    editText,
     addTodo,
     deleteTodo,
+    editTodo,
   }
 
 })
