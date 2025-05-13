@@ -12,15 +12,15 @@
       v-for="(todo, index) in todos" 
       class="list-none">
         <template v-if="editStatus === index">
-          <input v-model="editText" class="w-full">
+          <input v-model="editText" class="w-full my-[20px]">
         </template>
         <template v-else>
           <p class="w-5/6">{{ todo }}</p>
         </template>
         <div class="flex justify-end gap-[10px]">
           <template v-if="editStatus === index">
-            <button @click="" class="button save">保存</button>
-            <button @click="" class="button cancel">キャンセル</button>
+            <button @click="saveTodo" class="button save">保存</button>
+            <button @click="cancelTodo" class="button cancel">キャンセル</button>
           </template>
           <template v-else>
             <button @click="editTodo(index)" class="button edit">編集</button>
@@ -39,7 +39,7 @@ import { useTodoStore } from '../stores/todo'
 
 const todoStore = useTodoStore()
 const { todos, newTodo, editStatus, editText } = storeToRefs(todoStore)
-const { addTodo, deleteTodo, editTodo } = todoStore
+const { addTodo, deleteTodo, editTodo, saveTodo, cancelTodo } = todoStore
 </script>
 <style scoped>
 .button {

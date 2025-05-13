@@ -27,9 +27,25 @@ export const useTodoStore = defineStore('todo', () => {
     todos.value.splice(index, 1)
   }
 
+  // メモ編集機能
   function editTodo(index:number): void {
     editStatus.value = index
     editText.value = todos.value[index]
+  }
+
+  // メモ編集後に保存
+  function saveTodo():void {
+    if (editStatus.value !== null && editText.value.trim()) {
+      todos.value[editStatus.value] = editText.value.trim()
+      editStatus.value = null
+      editText.value = ''
+    }
+  }
+
+  // メモ編集キャンセル
+  function cancelTodo():void {
+    editStatus.value = null
+    editText.value = ''
   }
 
   return {
@@ -40,6 +56,8 @@ export const useTodoStore = defineStore('todo', () => {
     addTodo,
     deleteTodo,
     editTodo,
+    saveTodo,
+    cancelTodo,
   }
 
 })
