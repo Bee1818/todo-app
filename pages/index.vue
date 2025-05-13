@@ -11,10 +11,21 @@
       <li
       v-for="(todo, index) in todos" 
       class="list-none">
-        <p class="w-5/6">{{ todo }}</p>
+        <template v-if="editStatus === index">
+          <input v-model="editText" class="w-full my-[20px]">
+        </template>
+        <template v-else>
+          <p class="w-5/6">{{ todo }}</p>
+        </template>
         <div class="flex justify-end gap-[10px]">
-          <button class="button edit block">編集</button>
-          <button @click="deleteTodo(index)" class="button delete block">削除</button>
+          <template v-if="editStatus === index">
+            <button @click="saveTodo" class="button save">保存</button>
+            <button @click="cancelTodo" class="button cancel">キャンセル</button>
+          </template>
+          <template v-else>
+            <button @click="editTodo(index)" class="button edit">編集</button>
+            <button @click="deleteTodo(index)" class="button delete">削除</button>
+          </template>
         </div>
       </li>
     </ul>
@@ -27,8 +38,8 @@ import { storeToRefs } from 'pinia'
 import { useTodoStore } from '../stores/todo'
 
 const todoStore = useTodoStore()
-const { todos, newTodo } = storeToRefs(todoStore)
-const { addTodo, deleteTodo } = todoStore
+const { todos, newTodo, editStatus, editText } = storeToRefs(todoStore)
+const { addTodo, deleteTodo, editTodo, saveTodo, cancelTodo } = todoStore
 </script>
 <style scoped>
 .button {
@@ -37,13 +48,13 @@ const { addTodo, deleteTodo } = todoStore
   cursor: pointer;
   color: white;
 }
-.add {
+.add, .save {
   background-color: blue;
 }
 .edit {
   background-color: green;
 }
-.delete {
+.delete, .cancel {
   background-color: red;
 }
 </style>
