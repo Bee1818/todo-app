@@ -36,10 +36,17 @@
 // storeToRefs:todo.tsをvueでも使えるようにする
 import { storeToRefs } from 'pinia'
 import { useTodoStore } from '../stores/todo'
+import { onMounted, watch } from 'vue' 
 
 const todoStore = useTodoStore()
 const { todos, newTodo, editStatus, editText } = storeToRefs(todoStore)
 const { addTodo, deleteTodo, editTodo, saveTodo, cancelTodo } = todoStore
+
+onMounted(() => {
+  watch(todos, (value) => {
+    localStorage.setItem('todos', JSON.stringify(value))
+  }, { deep: true })
+})
 </script>
 <style scoped>
 .button {
