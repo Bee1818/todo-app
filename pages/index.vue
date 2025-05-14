@@ -42,7 +42,16 @@ const todoStore = useTodoStore()
 const { todos, newTodo, editStatus, editText } = storeToRefs(todoStore)
 const { addTodo, deleteTodo, editTodo, saveTodo, cancelTodo } = todoStore
 
+// 
 onMounted(() => {
+  // localStorage読み込み
+  if (typeof window !== 'undefined') {
+    const todoStorage = localStorage.getItem('todos')
+    if (todoStorage) {
+      todos.value = JSON.parse(todoStorage)
+    }
+  }
+
   watch(todos, (value) => {
     localStorage.setItem('todos', JSON.stringify(value))
   }, { deep: true })

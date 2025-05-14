@@ -48,19 +48,6 @@ export const useTodoStore = defineStore('todo', () => {
     editText.value = ''
   }
 
-  // localStorage読み込み
-  const isLoaded = ref(false)
-
-  if (typeof window !== 'undefined') {
-    const todoStorage = localStorage.getItem('todos')
-    if (todoStorage) {
-      todos.value = JSON.parse(todoStorage)
-    }
-    isLoaded.value = true
-  }
-
-  // localStorage更新
-
   return {
     todos,
     newTodo,
